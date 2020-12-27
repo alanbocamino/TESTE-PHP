@@ -14,7 +14,7 @@
 include('conexao.php');
 
 //TABELA
-
+$filtrocor = '%';
  ?> 
  
  
@@ -28,10 +28,29 @@ include('conexao.php');
 			<li><a href="remover.html">REMOVER PRODUTO</a></li>
 				</ul>
 	</div>
+	
+	<form action="#">
+<select style="width:474px;
+    padding:10px" name="select" method="post">
+<option value="%">TODAS AS CORES</option>
+  <option value="1">VERMELHO</option>
+  <option value="2">AMARELO</option>
+  <option value="3">AZUL</option>
+</select>
+
+<input type='submit' value="FILTRAR" name="FILTRAR"/>
+</form>
 
 <?php
 
-$sql_query = "SELECT * FROM Produtos, Preco WHERE Produtos.IDPROD = Preco.IDPROD";
+IF($_GET['select']==NULL){
+$filtrocor = '%';};
+IF($_GET['select']!=NULL){
+$filtrocor = $_GET['select'];}
+
+
+
+$sql_query = "SELECT * FROM Produtos, Preco WHERE Produtos.IDPROD = Preco.IDPROD and Produtos.cor LIKE '$filtrocor'";
 $resulta = $conn->query($sql_query);
 
 if ($resulta->num_rows > -1){
