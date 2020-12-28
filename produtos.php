@@ -43,6 +43,8 @@ $filtrocor = '%';
 
 <?php
 
+	//SELECIONA A COR PARA O FILTRO
+	
 IF($_GET['select']==NULL){
 $filtrocor = '%';};
 IF($_GET['select']!=NULL){
